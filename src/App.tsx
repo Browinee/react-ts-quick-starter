@@ -1,20 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
-import Header from 'Components/Header';
+import ProtectedRoute from 'Components/ProtectedRoute';
+import Login from 'Components/Login';
+import NotFoundPage from 'Components/NotFoundPage';
+import Dashboard from './module/dashboard';
 import rootSaga from './sagas';
 import './App.scss';
 
 const logger = createLogger();
-
-interface IProps {
-  name: string;
-  age: number;
-}
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(() => {
@@ -22,31 +20,32 @@ const store = createStore(() => {
 }, composeWithDevTools(applyMiddleware(logger, sagaMiddleware)));
 sagaMiddleware.run(rootSaga);
 
-function App(props: IProps) {
-  const { name, age } = props;
+function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
-          <Route exact path="/login" component={() => {
-            return (
-              <div className='app'>
-                <Header />
-                <span>{`Hello! I'm ${name}, ${age} yearssss old.`}</span>
-              </div>
-            )
-          }} />
-          {/*<ModuleRoute path={`${config.basePath}/${ModuleNames.account}`} component={AccountModuleRootComponent} />*/}
-          {/*<ModuleRoute path={`${config.basePath}/${ModuleNames.withdraw}`} component={WithdrawModuleRootComponent} />*/}
-          {/*/!*NOTE: 預設轉導到提現的提現子頁面*!/*/}
-          {/*<ModuleRedirect to={`${config.basePath}/${ModuleNames.withdraw}`} />*/}
-          {/*NOTE: 預設轉導到找不到子頁面*/}
-          {/*<ModuleRoute component={NotFoundPage} />*/}
-          <Redirect to="/login"/>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <ProtectedRoute exact path='/dashboard'>
+            <Dashboard />
+          </ProtectedRoute>
+          <Route exact path='/dashboard'>
+            <Dashboard />
+          </Route>
+          <Route exact path='/'>
+            <Redirect from='/' to='dashboard' />
+          </Route>
+          <Route exact path='/notfound'>
+            <NotFoundPage />
+          </Route>
+          <Route path='*'>
+            <Redirect from='/' to='notfound' />
+          </Route>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
-
   );
 }
 
