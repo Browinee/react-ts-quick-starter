@@ -1,10 +1,11 @@
+import service from 'Src/infra/http';
+
 const LoginService = {
-  login(): Promise<{ isLogin: boolean }> {
-    return Promise.resolve({ isLogin: true });
-    // return service.post('/login', {
-    //   name,
-    //   password,
-    // });
+  login(name: string, password: string): Promise<any> {
+    return service.post('/login', {
+      name,
+      password,
+    });
   },
 };
 export default LoginService;

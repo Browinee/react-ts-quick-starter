@@ -12,6 +12,7 @@ import Dashboard from './module/dashboard';
 import rootSaga from './store/sagas';
 import './App.scss';
 import rootRedcuer from './store/reducers';
+import './mock';
 
 const logger = createLogger();
 

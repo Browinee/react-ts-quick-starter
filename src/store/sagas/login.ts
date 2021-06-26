@@ -4,7 +4,8 @@ import LoginService from 'Src/service/login';
 
 function* authorize(name: string, password: string): any {
   try {
-    yield call(LoginService.login, name, password);
+    const loginInfo: any = yield call(LoginService.login, name, password);
+    console.log('loginInfo', loginInfo);
     yield put(logged());
   } catch (error: any) {
     console.error(error);
