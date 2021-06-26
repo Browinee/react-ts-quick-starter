@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, createStore } from 'redux';
@@ -9,15 +9,14 @@ import ProtectedRoute from 'Components/ProtectedRoute';
 import Login from 'Components/Login';
 import NotFoundPage from 'Components/NotFoundPage';
 import Dashboard from './module/dashboard';
-import rootSaga from './sagas';
+import rootSaga from './store/sagas';
 import './App.scss';
+import rootRedcuer from './store/reducers';
 
 const logger = createLogger();
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(() => {
-  return {};
-}, composeWithDevTools(applyMiddleware(logger, sagaMiddleware)));
+const store = createStore(rootRedcuer, composeWithDevTools(applyMiddleware(logger, sagaMiddleware)));
 sagaMiddleware.run(rootSaga);
 
 function App() {
