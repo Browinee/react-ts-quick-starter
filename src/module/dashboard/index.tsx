@@ -1,7 +1,16 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-const dashboard = () => {
-  return <p>dashboard</p>;
+const Dashboard = () => {
+  return (
+    // <Modulelayout>
+    <Switch>
+      <Route path='/dashboard'>
+        <Dashboard />
+      </Route>
+    </Switch>
+    // </Modulelayout>
+  );
 };
 
-export default dashboard;
+export default Dashboard;
