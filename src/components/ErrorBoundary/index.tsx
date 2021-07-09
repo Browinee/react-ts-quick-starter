@@ -16,6 +16,7 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
+    // @ts-ignore
     if (this.state.hasError) {
       return <FallbackPage />;
     }

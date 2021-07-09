@@ -13,6 +13,7 @@ import rootSaga from './store/sagas';
 import './App.scss';
 import rootRedcuer from './store/reducers';
 import './mock';
+import TodoList from './module/todolist';
 
 const logger = createLogger();
 
@@ -33,6 +34,9 @@ function App() {
           </ProtectedRoute>
           <Route exact path='/'>
             <Redirect from='/' to='dashboard' />
+          </Route>
+          <Route exact path='/todolist'>
+            <TodoList />
           </Route>
           <Route exact path='/notfound'>
             <NotFoundPage />
