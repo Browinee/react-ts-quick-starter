@@ -32,9 +32,6 @@ function App() {
           <ProtectedRoute exact path='/dashboard'>
             <Dashboard />
           </ProtectedRoute>
-          <Route exact path='/'>
-            <Redirect from='/' to='dashboard' />
-          </Route>
           <Route exact path='/todolist'>
             <TodoList />
           </Route>
