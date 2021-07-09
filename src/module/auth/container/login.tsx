@@ -4,7 +4,7 @@ import Login from '../pages/login';
 
 const mapStateToProps = (state: any) => {
   return {
-    isLoading: state.app.loading,
+    loading: state.app.loading,
   };
 };
 const mapDispatchToProps = {

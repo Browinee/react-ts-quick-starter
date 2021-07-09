@@ -1,4 +1,4 @@
-import { TOGGLE_LOADING } from 'Src/store/actions/login';
+import { TOGGLE_LOADING } from 'src/store/actions/app';
 
 type initialStateProps = {
   loading: boolean;

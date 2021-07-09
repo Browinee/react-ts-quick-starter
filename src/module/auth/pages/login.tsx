@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from 'Src/module/auth/pages/components/LoginForm';
+import LoginForm, { FormProps } from 'src/module/auth/pages/components/LoginForm';
 import LoginWrapper from './components/LoginWrapper';
 
 interface LoginProps {
@@ -8,11 +8,11 @@ interface LoginProps {
 
 const Login = (props: LoginProps) => {
   const { loading } = props;
-  const handleSubmit = () => {};
+  const handleSubmit = (formData: FormProps) => {};
   return (
     <LoginWrapper>
       <h2>登入囉！</h2>
-      <LoginForm />
+      <LoginForm loading={loading} handleSubmit={handleSubmit} />
     </LoginWrapper>
   );
 };
