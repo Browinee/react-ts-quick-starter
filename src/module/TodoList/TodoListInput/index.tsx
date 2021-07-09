@@ -3,19 +3,19 @@ import React from 'react';
 import useTodoInputService from './useTodoInputService';
 
 export default function TodoListInput() {
-  const todooInputService = useTodoInputService();
+  const todoInputService = useTodoInputService();
   return (
     <Card>
-      <Form form={todooInputService.form} onFinish={todooInputService.handleSubmit}>
-        <Form.Item name='title' label='标题' rules={[{ required: true, message: '标题为必填项' }]}>
+      <Form form={todoInputService.form} onFinish={todoInputService.handleSubmit}>
+        <Form.Item name='title' label='標題' rules={[{ required: true, message: '標題為必填' }]}>
           <Input />
         </Form.Item>
-        <Form.Item name='description' label='详情'>
+        <Form.Item name='description' label='詳情'>
           <Input />
         </Form.Item>
         <Form.Item>
           <Button type='primary' htmlType='submit'>
-            添加
+            新增
           </Button>
         </Form.Item>
       </Form>

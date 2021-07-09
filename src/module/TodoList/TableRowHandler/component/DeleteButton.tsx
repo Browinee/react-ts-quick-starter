@@ -1,9 +1,9 @@
 import { Button } from 'antd';
-import React from 'react';
-import { useTable } from 'Src/module/TodoList/Table/useTableService';
+import React, { useContext } from 'react';
+import { TableService } from '../useTableService';
 
 export default function DeleteButton() {
-  const tableService = useTable();
+  const tableService = useContext(TableService);
   return (
     <Button type='primary' onClick={tableService.deleteCurrentItem} danger>
       刪除

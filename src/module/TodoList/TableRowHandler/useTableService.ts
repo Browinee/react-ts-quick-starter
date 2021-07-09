@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import useTodoService, { TodoDataProps } from '../useTodoService';
+import useTodoService, { TodoDataProps, TodoService } from '../useTodoService';
 
 export interface TableServiceProps {
   title: string;
@@ -8,11 +8,17 @@ export interface TableServiceProps {
   setCurrentItemWithDescription: (description: string) => void;
   deleteCurrentItem: () => void;
 }
-export const TableService = React.createContext<TableServiceProps | null>(null);
+export const TableService = React.createContext<TableServiceProps>({
+  title: '',
+  setTitle: () => {},
+  currentItem: { title: '', description: '' },
+  deleteCurrentItem: () => {},
+  setCurrentItemWithDescription: (description) => {},
+});
 
 export default function useTableService(): TableServiceProps {
   const [title, setTitle] = useState('');
-  const todoService = useTodoService();
+  const todoService = useContext(TodoService);
   const currentItem = useMemo(
     () =>
       todoService.todoList.find((el: any) => el.title === title) || {
@@ -23,8 +29,8 @@ export default function useTableService(): TableServiceProps {
   );
   const setCurrentItemWithDescription = useCallback(
     (description: string) => {
-      todoService.setTodoList((res: any) => {
-        return res.map((el: any) => {
+      todoService.setTodoList((res: TodoDataProps[]) => {
+        return res.map((el: TodoDataProps) => {
           if (el.title === title) {
             return { ...el, description };
           }
@@ -35,7 +41,9 @@ export default function useTableService(): TableServiceProps {
     [todoService, title],
   );
   const deleteCurrentItem = useCallback(() => {
-    todoService.setTodoList((res: any) => res.filter((el: any) => el.title !== title));
+    todoService.setTodoList((res: TodoDataProps[]) => {
+      return res.filter((el: TodoDataProps) => el.title !== title);
+    });
   }, [title, todoService]);
   return {
     title,
@@ -45,11 +53,3 @@ export default function useTableService(): TableServiceProps {
     deleteCurrentItem,
   };
 }
-
-export const useTable = (): TableServiceProps => {
-  const context = useContext(TableService);
-  if (!context) {
-    throw new Error('useTable should under TableService');
-  }
-  return context;
-};

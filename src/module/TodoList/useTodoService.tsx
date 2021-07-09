@@ -10,7 +10,8 @@ export interface TodoContextType {
   todoList: TodoDataProps[];
   setTodoList: any;
 }
-export const TodoService = React.createContext<TodoContextType | null>(null);
+const noop = () => {};
+export const TodoService = React.createContext<TodoContextType>({ todoList: [], setTodoList: noop });
 
 export default function useTodoService() {
   const [todoList, setTodoList] = useState<TodoDataProps[]>([]);
@@ -21,6 +22,7 @@ export default function useTodoService() {
     }
   });
   useEffect(() => {
+    console.log('useTodoService - useEffect', { todoList, stored });
     if (todoList !== stored) {
       setStored(todoList);
     }
