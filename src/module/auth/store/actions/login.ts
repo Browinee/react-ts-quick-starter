@@ -3,11 +3,11 @@ export const LOGGED = 'LOGGED';
 export const LOGOUT = 'LOGOUT';
 export const TO_LOGOUT = 'TO_LOGOUT';
 
-export const login = (username: string, password: string) => {
+export const login = (name: string, password: string) => {
   return {
     type: TO_LOGIN,
     payload: {
-      username,
+      name,
       password,
     },
   };

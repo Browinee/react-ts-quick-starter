@@ -1,6 +1,6 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useContext } from 'react';
-import useTableService, { TableService } from '../useTableService';
+import { TableService } from '../useTableService';
 
 export default function EditButton() {
   const tableService = useContext(TableService);

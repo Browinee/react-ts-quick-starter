@@ -19,7 +19,7 @@ export default function LoginForm(props: LoginFormProps) {
       <Form.Item name='name' label='姓名' rules={[{ required: true, message: '必填' }]}>
         <Input placeholder='請輸入姓名' />
       </Form.Item>
-      <Form.Item name='passsword' label='密碼'>
+      <Form.Item name='password' label='密碼'>
         <Input placeholder='請輸入密碼' type='password' />
       </Form.Item>
       <Form.Item>

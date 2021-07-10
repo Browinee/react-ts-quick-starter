@@ -1,4 +1,4 @@
-import { LOGGED, LOGOUT } from 'Src/store/actions/login';
+import { LOGGED, LOGOUT } from '../actions/login';
 
 type initialStateProps = {
   isLogin: boolean;

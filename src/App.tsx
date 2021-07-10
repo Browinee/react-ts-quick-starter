@@ -6,7 +6,6 @@ import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import ProtectedRoute from 'Components/ProtectedRoute';
-// import Login from 'Components/Login';
 import NotFoundPage from 'Components/NotFoundPage';
 import Login from './module/auth';
 import Dashboard from './module/dashboard';
@@ -14,7 +13,7 @@ import rootSaga from './store/sagas';
 import './App.scss';
 import rootRedcuer from './store/reducers';
 import './mock';
-import TodoList from './module/todolist';
+import TodoList from './module/todoLIstDDD';
 
 const logger = createLogger();
 
@@ -40,7 +39,7 @@ function App() {
             <NotFoundPage />
           </Route>
           <Route path='*'>
-            <Redirect from='/' to='notfound' />
+            <Redirect from='/' to='login' />
           </Route>
         </Switch>
       </HashRouter>
