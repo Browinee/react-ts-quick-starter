@@ -1,10 +1,6 @@
-import Mock from 'mockjs';
-import Login from './login';
+import { setupWorker } from 'msw';
+import { handlers } from './auth';
 
-Mock.setup({
-  timeout: '300-600',
-});
+const worker = setupWorker(...handlers);
 
-Mock.mock('/api/login', 'post', Login.login);
-Mock.mock('/api/logout', 'get', Login.logout);
-export default Mock;
+export { worker };
